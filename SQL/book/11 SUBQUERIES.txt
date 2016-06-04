@@ -1,0 +1,33 @@
+Get all customers who bought RGAN01
+
+SELECT
+	cust_id
+FROM
+	Orders
+WHERE
+	order_num IN (
+		SELECT
+			order_num
+		FROM
+			OrderItems
+		WHERE
+			prod_id = 'RGAN01'
+	)
+
+---
+
+Get id, name and count of orders by every customer
+
+SELECT
+	cust_id,
+	cust_name,
+	(
+		SELECT
+			count(*)
+		FROM
+			Orders
+		WHERE
+			Orders.cust_id = Customers.cust_id
+	) AS orders_count
+FROM
+	Customers

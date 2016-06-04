@@ -1,0 +1,42 @@
+Get count of products by every vendor
+(Group, then apply a function)
+
+SELECT vend_id, count(*) AS num_prods
+FROM Products
+GROUP BY vend_id
+
+
+WHERE - rows, HAVING - groups
+
+SELECT vend_id, count(*) AS num_prods
+FROM Products
+WHERE prod_price >= 4
+GROUP BY vend_id
+HAVING count(*) >= 2
+
+SELECT order_num, count(*) AS items
+FROM OrderItems
+GROUP BY order_num
+HAVING count(*) >= 3
+ORDER BY items, order_num
+
+---
+
+ORDER
+
+SELECT
+FROM
+WHERE
+GROUP BY
+HAVING
+ORDER BY
+
+---
+
+Example
+
+SELECT maker, count(model)
+FROM Product
+WHERE type = 'PC'
+GROUP BY maker
+HAVING count(model) >= 3

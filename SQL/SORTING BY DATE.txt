@@ -1,0 +1,14 @@
+Convert time to string
+
+SELECT CONVERT(CHAR(5), date, 110) "mm-dd" 
+FROM Battles;
+
+Same could be done using MONTH() and DAY()
+SELECT date 
+FROM Battles 
+ORDER BY MONTH(date), DAY(date);
+
+Add a name
+SELECT DAY(date) BD_day, DATENAME(mm, date) BD_month, name 
+FROM Battles 
+ORDER BY MONTH(date), DAY(date);

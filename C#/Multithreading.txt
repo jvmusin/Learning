@@ -1,0 +1,10 @@
+Домен - область памяти, в которой находится всё (в т.ч. и статические переменные)
+
+Process
+	Domain(1,2,...)
+		Thread (1,2,...)
+		
+BeginInboke, EndInvoke - start and finish waiting for the thread completing
+
+do something in parallel
+Parallel.For(0, 10, MakeWork);

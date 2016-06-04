@@ -1,0 +1,89 @@
+PRIMARY KEYS (can be added using create or alter table)
+
+CREATE TABLE Vendors
+(
+	vend_id			CHAR(10)	NOT NULL	PRIMARY KEY,
+	vend_name		CHAR(50)	NOT NULL,
+	vend_address	CHAR(50)	NULL,
+	vend_city		CHAR(50)	NULL,
+	cend_state		CHAR(5)		NULL,
+	vend_zip		CHAR(10)	NULL,
+	vend_country	CHAR(50)	NULL
+);
+
+Add a primary key using alter table
+ALTER TABLE Vendors
+ADD CONSTRAINT PRIMARY KEY (vend_id);
+
+---
+
+FOREIGN KEYS (some columns of table can be connected to primary keys of other table)
+
+CREATE TABLE Orders
+(
+	order_num	INTEGER		NOT NULL	PRIMARY KEY,
+	order_time	DATETIME	NOT NULL,
+	cust_id		CHAR(10)	NOT NULL	REFERENCES Customers(cust_id)
+);
+
+ALTER TABLE Orders
+ADD CONSTRAINT
+FOREIGN KEY (cust_id) REFERENCES Customers (cust_id)
+
+---
+
+UNIQUE columns (not primary keys)
+
+Defines like explained above (with UNIQUE keyword)
+
+---
+
+CHECK - checks some conditions
+
+CREATE TABLE OrderItems
+(
+	order_num	INTEGER		NOT NULL,
+	order_item	INTEGER		NOT NULL,
+	prod_id		CHAR(10)	NOT NULL,
+	quantity	INTEGER		NOT NULL	CHECK (quantity > 0),
+	item_price	MONEY		NOT NULL
+);
+
+ADD CONSTRAINT CHECK (gender LIKE '[MF]')
+
+---
+
+INDEXES
+
+CREATE INDEX prod_name_ind
+ON Products (prod_name);
+
+---
+
+TRIGGERS
+use with insert, update, delete
+
+cust_state to UPPERCASE
+
+MS SQL SERVER
+CREATE TRIGGER customer_state
+ON Customers
+FOR INSERT, UPDATE
+AS
+UPDATE Customers
+SET cust_state = Upper(cust_state)
+WHERE Customers.cust_id = inserted.cust_id;
+
+Oracle and PostgreSQL
+CREATE TRIGGER customer_state
+AFTER INSERT OR UPDATE
+FOR EACH ROW
+BEGIN
+UPDATE Customers
+SET cust_state = Upper(cust_state)
+WHERE Customers.cust_id = :OLD.cust_id
+END;
+
+---
+
+SECURITY - GRANT and REVOKE

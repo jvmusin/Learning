@@ -1,0 +1,23 @@
+UPDATE
+
+UPDATE Customers
+SET cust_email = 'kim@thetoystore.com'
+WHERE cust_id = '1000000005';
+
+UPDATE Customers
+SET	cust_contact = 'Sam Roberts',
+	cust_email = 'sam@toyland.com'
+WHERE cust_id = '1000000006';
+
+Also can be used FROM
+
+---
+
+DELETE
+
+DELETE FROM Customers
+WHERE cust_id = '1000000006';
+
+Removing full table
+TRUNCATE Customers
+

@@ -1,0 +1,14 @@
+AVG()	- average value
+COUNT() - strings count
+MAX()	- max value
+MIN()	- min value
+SUM()	- sum of values
+NULL values ignored
+
+Get average price
+SELECT AVG(prod_price) FROM Products WHERE vend_id = 'DLL01'
+
+SELECT SUM(item_price*quantity) AS total_price FROM OrderItems WHERE order_item = 20005
+
+Selecting count of distinct prices
+SELECT count(DISTINCT prod_price) FROM Products

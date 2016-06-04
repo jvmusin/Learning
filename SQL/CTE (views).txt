@@ -1,0 +1,13 @@
+WITH ModelsAndPrices(model, price) AS (
+	SELECT model, price
+	FROM PC
+		UNION
+	SELECT model, price
+	FROM Laptop
+		UNION
+	SELECT model, price
+	FROM Printer
+)
+SELECT model
+FROM ModelsAndPrices
+WHERE price >= ALL(SELECT price FROM ModelsAndPrices)

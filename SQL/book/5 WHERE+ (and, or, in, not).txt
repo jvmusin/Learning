@@ -1,0 +1,39 @@
+AND
+
+SELECT prod_id, prod_price, prod_name
+From Products
+Where vend_id = 'DLL01' AND prod_price <= 4
+
+---
+
+OR
+
+SELECT prod_name, prod_price
+FROM Products
+WHERE vend_id = 'DLL01' OR vend_id = 'BRS01'
+
+---
+
+Priority: AND, then OR (or parentheses)
+
+SELECT prod_name, prod_price
+FROM Products
+WHERE (vend_id = 'DLL01' OR vend_id = 'BRS01') AND prod_price >= 10;
+
+---
+
+IN
+
+SELECT prod_name, prod_price
+FROM Products
+WHERE vend_id IN ('DLL01', 'BRS01')		-- Equal to WHERE vend_id = 'DLL01' OR vend_id = 'BRS01' (== OR)
+ORDER BY prod_name
+
+---
+
+NOT
+
+SELECT prod_name
+From Products
+WHERE NOT vend_id = 'DLL01'
+ORDER BY prod_name

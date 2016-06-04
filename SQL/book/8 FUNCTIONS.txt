@@ -1,0 +1,36 @@
+UPPER - to upper case
+SELECT vend_name, UPPER(vend_name) AS vend_name_upcase FROM Vendors
+
+LEFT()
+LENGTH() DATALENGTH() LEN()
+LOWER() LCASE()
+LTRIM()
+RIGHT()
+RTRIM()
+SOUNDEX()
+UPPER() USASE()
+
+---
+
+SOUNDEX - sounds like...
+
+SELECT cust_name, cust_contact
+FROM Customers
+WHERE SOUNDEX(cust_contact) = SOUNDEX('Michael Green')
+
+---
+
+DATEPART takes some part of date (thanks cap)
+DATEPART('yyyy', 2012) for example
+
+---
+
+MATH
+
+ABS()
+COS()
+EXP()
+PI()
+SIN()
+SQRT()
+TAN()

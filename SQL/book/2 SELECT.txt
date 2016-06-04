@@ -1,0 +1,25 @@
+﻿Регистр команд значения не имеет
+Точка с запятой тоже (чаще всего)
+
+Основной синтаксис
+SELECT имя_столбца1, имя_столбца2, имя_столбца3 FROM имя_таблицы
+SELECT prod_id, prod_name, prod_price FROM Products
+SELECT * FROM products - возьмёт все столбцы
+
+Только различные записи
+SELECT DISTINCT vend_id	FROM Products - возьмёт все различные значения (DISTINCT должно находиться перед списком имён столбцов)
+
+Взять x первых
+SELECT TOP 5 prod_name FROM Products - возьмёт 5 первых - ANSI
+SELECT prod_name FROM Products FETCH FIRST 5 ROWS ONLY - DB2
+SELECT prod_name FROM Products WHERE ROWNUM <= 5 - Oracle
+SELECT prod_name FROM Products LIMIT 5 - SQLite
+
+Взять x первых, но начиная с y индекса
+SELECT TOP 5 OFFSET 4 * FROM Products (OFFSET - индекс первой записи (индексы идут с 0))
+SELECT * FROM Products LIMIT 5, 4 - SQLite
+
+Комментарии
+-- в любом месте
+#  в начале строки
+/* ... */

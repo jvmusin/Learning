@@ -1,0 +1,23 @@
+class MyWindow : Form
+{
+	protected override void OnFormClosing(FormClosingEventArgs e)
+	{
+		var result = MessageBox.Show("Действительно закрыть?", "", MessageBoxButtons.YesNo);
+		if (result != DialogResult.Yes) e.Cancel = true;
+	}
+}
+
+public static void Main()
+{
+	// можно работать так:
+	var form = new Form();
+	form.FormClosing += (sender, args) =>
+	{
+		var result = MessageBox.Show("Действительно закрыть?", "", MessageBoxButtons.YesNo);
+		if (result != DialogResult.Yes) args.Cancel = true;
+	};
+
+	// Или так:
+	form = new MyWindow();
+	Application.Run(form);
+}

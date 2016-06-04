@@ -1,0 +1,23 @@
+Сортировка по имени продукта
+ORDER BY ставится в конце (даже после WHERE)
+
+По одному столбцу
+SELECT prod_name
+FROM Products
+ORDER BY prod_name;
+
+По нескольким столбцам
+SELECT *
+From Products
+ORDER BY prod_name, prod_price;
+
+По номерам столбцов (только по указанным в SELECT столбцам)
+(+ можно смешивать номера и имена столбцов)
+SELECT *
+From Products
+ORDER BY 4, 3
+
+Сортировка в указанном порядке
+SELECT *
+From Products
+ORDER BY 4 DESC, 3 ASC

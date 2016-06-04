@@ -1,0 +1,26 @@
+Symbol '=' or '||' (concat)
+
+SELECT vend_name || ' (' || vend_country || ')' as 'rowname' FROM Vendors
+In MySQL :
+SELECT Concat(vend_name, ' (', vend_country, ')') FROM Vendors
+
+Trim strings (exists LTRIM, TRIM, RTRIM)
+SELECT PTRIM(vend_name) + ' (' + RTRIM(vend_country) = ')' FROM Vendors
+
+---
+
+MATH (+, -, /, *)
+
+SELECT
+	prod_id,
+	quantity,
+	item_price,
+	quantity * item_price AS expanded_price
+FROM
+	OrderItems
+WHERE
+	order_num = 20008
+
+SELECT 3*2
+SELECT TRIM('   asd   ')
+

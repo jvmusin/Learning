@@ -1,0 +1,41 @@
+CREATE VIEW
+DROP VIEW
+
+CREATE VIEW ProductCustomers AS
+SELECT
+	cust_name,
+	cust_contact,
+	prod_id
+FROM Customers
+INNER JOIN Orders ON Customers.cust_id = Orders.cust_id
+INNER JOIN OrderItems ON OrderItems.order_num = Orders.order_num
+
+SELECT *
+FROM ProductCustomers
+WHERE prod_id = 'RGAN01'
+
+CREATE VIEW VendorLocations AS SELECT
+	vend_name || ' (' || vend_country || ')' AS vend_title
+FROM
+	Vendors
+
+CREATE VIEW CustEMailList AS SELECT
+	cust_id,
+	cust_name,
+	cust_email
+FROM
+	Customers
+WHERE
+	cust_email IS NOT NULL
+
+CREATE VIEW OrderItemsExpanded AS SELECT
+	order_num,
+	prod_id,
+	quantity,
+	quantity * item_price AS expanded_price
+FROM
+	OrderItems
+
+SELECT *
+FROM OrderItemsExpanded
+WHERE order_num = 20008;

@@ -1,0 +1,74 @@
+Using aliases
+
+SELECT
+	cust_name,
+	cust_contact
+FROM
+	Customers AS C,
+	Orders AS O,
+	OrderItems AS OI
+WHERE
+	C.cust_id = O.cust_id
+AND OI.order_num = O.order_num
+AND prod_id = 'RGAN01'
+
+---
+
+SELF JOIN
+
+SELECT
+	*
+FROM
+	Customers AS C1,
+	Customers AS C2
+WHERE
+	C2.cust_contact = 'Jim Jones'
+AND C1.cust_name = C2.cust_name
+
+---
+
+(NATURAL?) JOIN
+
+SELECT
+	C.*, O.order_num,
+	O.order_date,
+	OI.prod_id,
+	OI.quantity,
+	OI.item_price
+FROM
+	Customers AS C,
+	Orders AS O,
+	OrderItems AS OI
+WHERE
+	C.cust_id = O.cust_id
+AND OI.order_num = O.order_num
+AND prod_id = 'RGAN01'
+
+---
+
+OUTER JOIN (same as inner, but includes also NULL when there are no coincedences)
+
+SELECT
+	Customers.cust_id,
+	Orders.order_num
+FROM
+	Customers
+LEFT OUTER JOIN Orders ON Customers.cust_id = Orders.cust_id
+
+right or left means whih rows should be included
+
+FULL OUTER JOIN includes everything
+
+---
+
+Using with resulting functions
+
+SELECT
+	Customers.cust_id,
+	count(Orders.order_num)
+FROM
+	Customers
+LEFT OUTER JOIN Orders ON Customers.cust_id = Orders.cust_id
+GROUP BY
+	Customers.cust_id
+

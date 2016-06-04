@@ -1,0 +1,27 @@
+Why to use table name?
+
+SELECT AVG(price)
+FROM (
+SELECT price, maker
+FROM Product INNER JOIN PC ON Product.model = PC.model
+UNION
+SELECT price, maker
+FROM Product INNER JOIN Laptop ON Product.model = Laptop.model
+) as TableName
+WHERE maker = 'A'
+
+---
+
+How does it work?
+
+SELECT model FROM PC
+GROUP BY model
+ORDER BY MAX(price) DESC;
+
+and it doesn't
+
+SELECT model FROM PC
+GROUP BY model
+ORDER BY price DESC;
+
+Ans: It sorts whole groups

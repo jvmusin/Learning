@@ -1,0 +1,29 @@
+WHERE указывается сразу после названия таблицы (в предложении FROM)
+
+Взять все продукты с ценой 3.49
+SELECT prod_name, prod_price
+FROM Products
+WHERE prod_price = 3.49;
+
+Сначала пишется WHERE, затем ORDER BY
+
+=		равно
+<> !=	не равно
+<		меньше
+<=		меньше или равно
+>		больше
+>=		больше или равно
+!<		не меньше (больше или равно)
+!>		не больше (меньше или равно)
+BETWEEN	вхождение в диапазон
+IS NULL	null или нет
+
+SELECT prod_name, prod_price
+FROM Products
+WHERE prod_price BETWEEN 5 AND 10;
+
+SELECT prod_name
+FROM Products
+WHERE prod_price IS NULL;
+
+В SQLite можно использовать (=, ==, IS)

@@ -1,0 +1,42 @@
+LIKE
+
+---
+
+% - LIKE '*' in regular expressions (sometimes it is '*', not '%')
+
+SELECT prod_id, prod_name
+FROM Products
+WHERE prod_name LIKE 'Fish%'
+
+SELECT prod_id, prod_name
+From Products
+WHERE prod_name LIKE '%bean bag%'
+
+Sometimes empty space in string fills by whitespaces, so these patterns may not work
+Also '%' doesn't correspond to NULL values
+
+---
+
+_ - Like '?' in regular expressions (exactly one symbol)
+
+SELECT prod_id, prod_name
+FROM Products
+WHERE prod_name LIKE '__ inch teddy bear'
+
+---
+
+[] - Like same in regular expressions (group of symbols)
+
+Example below returns all customers whose contact begins with J or M
+SELECT cust_contact
+FROM Customers
+WHERE cust_contact LIKE '[JM]%'
+ORDER BY cust_contact
+
+LIKE '[^JM]%' --begins with anything excluding J and M (Sometimes it's '!', not '^')
+
+Same thing
+SELECT cust_contact
+FROM Customers
+WHERE NOT cust_id LIKE '[JM]%'
+ORDER BY cust_contact

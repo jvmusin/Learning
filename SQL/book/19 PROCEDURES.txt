@@ -1,0 +1,47 @@
+EXECUTE AddNewProduct(arg1, arg2, arg3, ..., argn)
+
+---
+
+ORACLE CODE
+
+CREATE PROCEDURE MailingListCount (
+	ListCount OUT INTEGER
+)
+IS
+	v_rows INTEGER;
+BEGIN
+	SELECT COUNT(*) INTO v_rows
+	FROM Customers
+	Where NOT cust_email IS NULL;
+	ListCount := v_rows;
+END;
+
+var ReturnValue NUMBER
+EXEC MailingListCount(:ReturnValue);
+SELECT ReturnValue;
+
+---
+
+MS SQL SERVER CODE
+
+CREATE PROCEDURE NewOrder @cust_id CHAR(10)
+AS
+DECLARE @order_num INTEGER
+-- Find last order number
+SELECT @order_num=MAX(order_num)
+FROM Orders
+-- Get new order number
+SELECT @order_num=@order_num+1
+-- Create new entity
+INSERT INTO ORDERS(order_num, order_date, cust_id)
+VALUES (@order_num, GETDATE(), @cust_id)
+-- Return number of created entity
+RETURN @order_num;
+
+SAME
+
+CREAtE PRCEDURE NewOrder @cust_id CHAR(10)
+AS
+INSERT INTO Orders(cust_id)
+VALUES(@cust_id)
+SELECT order_num = @@IDENTITY;

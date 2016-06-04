@@ -1,0 +1,23 @@
+CREATE TABLE
+
+CREATE TABLE Products2 (
+	prod_id char (10) NOTNULL,
+	vend_id char (10) NOTNULL,
+	prod_name char (254) NOTNULL,
+	prod_price decimal (8, 2) NOTNULL DEFAULT 123.45,
+	prod_desc NULL
+);
+
+---
+
+ALTER TABLE - updating definitions
+
+ALTER TABLE Vendors
+ADD vend_phone CHAR(20);
+
+ALTER TABLE Vendors
+DROP COLUMN vend_phone;
+
+---
+
+DROP TABLE CustCopy;

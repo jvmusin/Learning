@@ -1,0 +1,28 @@
+UNION
+
+SELECT cust_name, cust_contact, cust_email
+FROM Customers
+WHERE cust_state in ('IL', 'IN', 'MI')
+UNION
+SELECT cust_name, cust_contact, cust_email
+FROM Customers
+WHERE cust_name = 'Fun4All'
+ORDER BY cust_name, cust_contact
+
+UNION ALL -- for not removing same rows
+Sorting should be after all tables (at the end)
+
+EXCEPT (MINUS) -- except results which are rows are only in first table
+INTERSECT -- inlude rows which are in both tables
+
+---
+
+UNION EXAMPLE
+
+SELECT maker
+FROM PC INNER JOIN Product ON PC.model = Product.model
+WHERE speed >= 750
+	INTERSECT
+SELECT maker
+FROM Laptop INNER JOIN Product ON Laptop.model = Product.model
+WHERE speed >= 750
