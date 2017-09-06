@@ -1,0 +1,131 @@
+Еланцев Михаил Олегович - 3-11
+Основы интернет-технологий
+
+http - текстовый протокол прикладного уровня без сохранения состояния
+
+сервер - apache/nginx
+сервер -> php/nodejs/...
+в ответ html-страница
+
+http:// - схема
+логин:пароль@
+хост - ip/domain
+:порт/путь?параметры#якорь
+
+http:80
+https:443
+
+example.com - com-1lvl, example-2lvl
+
+www.example.com -> DNS-server -> ip
+
+Области применения
+	1. Веб-сайты
+	2. Веб-приложения (почтовые клиенты)
+	3. Десктопные приложения
+	4. Мобильная разработка - cordove/PhoneGap
+	5. Серверные приложения
+
+Приемущества использования веб-технологий:
+	1. Кроссплатформенность
+	2. Единые стандарты
+	3. Большое количество инструментов для разработки -> скорость разработки
+	4. Наличие большого количества компонент и готовых компонентов
+	5. Низкий порог вхождения для программистов
+Недостатки:
+	1. Большое число библиотек/фреймворков
+	2. Сложность отладки
+
+html - гипертекстовый язык разметки:
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<title>title</title>
+			<meta charset="UTF-8">
+			<!-- commentary -->
+		</head>
+		<body>
+			<div>content</div>
+		</body>
+	</html>
+
+Теги заголовков:
+	<h1,h2...h6>
+Абзацы: <p>
+<br>
+Ссылка <a href="http://google.com">
+	http://...
+	/abc...
+	abc...
+	target="_blank" - new tab
+	title="link text" (всплывающее)
+Изображения <img>
+	src="title.png"
+	alt="text"
+	title="текст при наведении"
+	width, height
+Списки
+	<ol>
+	<ul>
+	<li>
+Форматирование
+	<b> - жирное
+	<strong> - +смысловое ударение
+	<i> - курсив
+	<em> - курсив со смыслом
+Таблицы
+	<table border=>
+	<tr>
+	<td colspan="2" rowspan="2"(сверху)>
+	<thead> <tbody> <tfoot>
+Контейнеры
+	<div>
+	<span>
+Формы
+	<form method="GET/?q=XXX or /POST">
+	<input> - однострочный ввод
+	<password>
+	<label>
+		<input type="checkbox" id="XYZ">
+		ABC
+	</label>
+	<label for="XXX">XYZ</label>
+	placeholder, type="text"
+	<input type="submit">
+	<input type="radio"> - связываются по name
+	<input type="reset">
+	<input type="button">
+	
+	<button type="submit/button/reset">formatted text</button>
+	<input type="file">
+	<input type="hidden">
+	
+	<textarea>
+	
+	<select name="sel" size="10"(для невыпадающего)>
+		<option value="1">A</option">
+		<option value="2" selected>B</option">
+		<option value="3">C</option">
+	</select>
+Теги в <head>
+	<meta name="description" content="Описание страницы>
+	<meta name="keyowrds" content="Ключевые слова>
+	<meta http-equiv="refresh" content="1;site.ru">
+	
+	<link type="text/css" rel="stylesheet" href="main.css">
+	<style> a { oolor: red; } </style>
+	<script src="..." type="text/javascript">
+Медиа-элементы
+	<video> <audio>
+Фреймы
+	<iframe> - подгрузить другую страницу (виджет)
+<canvas>
+Теги структуры страница
+	<header>
+	Меню сайта через <nav>
+	<footer>
+	<article>
+	<aside> - сбоку
+	<section> (секция списка новостей)
+	
+	<figure> <fig-caption> - картинка с описанием
