@@ -1,0 +1,30 @@
+{
+  "name": "webgl",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack-dev-server --env development",
+    "build": "webpack -p --env production"
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "^3.5.0",
+    "babel-cli": "^6.26.0",
+    "babel-loader": "8.0.0-beta.2",
+    "babel-preset-env": "^1.6.1",
+    "css-loader": "^0.28.7",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "html-webpack-plugin": "^2.30.1",
+    "node-sass": "^4.7.2",
+    "sass-loader": "^6.0.6",
+    "source-map-loader": "^0.2.3",
+    "style-loader": "^0.19.1",
+    "typescript": "^2.7.2",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7",
+    "webpack-merge": "^4.1.1"
+  },
+  "dependencies": {
+    "d3": "^5.1.0"
+  }
+}

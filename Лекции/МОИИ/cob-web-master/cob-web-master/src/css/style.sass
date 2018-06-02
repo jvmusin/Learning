@@ -1,0 +1,101 @@
+body
+  z-index: 1
+  font-size: 14pt
+
+section
+  display: flex
+  justify-content: center
+
+.node
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  border: 2px solid black
+  background: white
+  border-radius: 5px
+  cursor: pointer
+  position: relative
+  .node-child
+    display: flex
+    flex-direction: row
+  .node-info
+    @extend .node
+    background: none
+    box-shadow: none
+    border: none
+    font-size: 14pt
+    padding: 10px
+
+#instancesPlace
+  display: flex
+  justify-content: center
+  position: absolute
+  right: 10%
+  top: 20%
+  table
+    margin-top: 50px
+    tr:first-child
+      background-color: #b9b9b9
+    td
+      padding: 5px
+
+#map
+  width: 500px
+  position: absolute
+  top: 100px
+
+.test-btn
+  padding: 5px
+  position: relative
+  background: none
+  border: none
+  outline: none
+
+.test-btn:active
+  color: red
+
+.test-btn:active:after
+  content: ''
+  position: absolute
+  border-radius: 50%
+  width: 0
+  height: 0
+  animation: op 1s ease
+  border: 50px solid rgba(255, 38, 32, 0.2)
+  left: -42px
+  top: -42px
+
+.test-btn:active::before
+  content: ''
+  position: absolute
+  border-radius: 50%
+  width: 0
+  height: 0
+  animation: slow 0.5s linear alternate
+  border: 50px solid rgba(255, 38, 32, 0.1)
+  left: -42px
+  top: -42px
+
+@keyframes slow
+  0%
+    left: 0
+    top: 0
+    border: 10px solid rgba(255, 38, 32, 0.1)
+  50%
+    left: -17px
+    top: -17px
+    border: 25px solid rgba(255, 38, 32, 0.3)
+  100%
+    left: -42px
+    top: -42px
+    border: 50px solid rgba(255, 38, 32, 0.1)
+
+
+@keyframes op
+  from
+    border: 50px solid rgba(255, 38, 32, 0.1)
+  to
+    border: 50px solid rgba(255, 38, 32, 0.2)
+
+
