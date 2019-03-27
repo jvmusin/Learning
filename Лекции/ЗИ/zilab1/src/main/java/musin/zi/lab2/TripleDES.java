@@ -5,10 +5,10 @@ public class TripleDES {
     private final DES des2;
     private final DES des3;
 
-    public TripleDES() {
-        des1 = new DES();
-        des2 = new DES();
-        des3 = new DES();
+    public TripleDES(String key1, String key2, String key3) {
+        des1 = new DES(key1);
+        des2 = new DES(key2);
+        des3 = new DES(key3);
     }
 
     public String encode(String s) {

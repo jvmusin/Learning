@@ -2,7 +2,7 @@ package musin.zi.lab2;
 
 public class Main {
     public static void main(String[] args) {
-        TripleDES tripleDES = new TripleDES();
+        TripleDES tripleDES = new TripleDES("First Key", "Second Key", "Third Key");
         String message = "Hello, World!";
         String encoded = tripleDES.encode(message);
         String decoded = tripleDES.decode(encoded);

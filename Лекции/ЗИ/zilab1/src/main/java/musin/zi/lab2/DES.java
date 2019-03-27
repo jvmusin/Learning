@@ -3,8 +3,9 @@ package musin.zi.lab2;
 import lombok.SneakyThrows;
 
 import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.DESKeySpec;
 import java.util.Base64;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -12,16 +13,18 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 public class DES {
     private final Cipher ecipher;
     private final Cipher dcipher;
-    private final SecretKey key;
 
     @SneakyThrows
-    public DES() {
+    public DES(String key) {
+        final DESKeySpec spec = new DESKeySpec(key.getBytes(UTF_8));
+        final SecretKeyFactory factory = SecretKeyFactory.getInstance("DES");
+        final SecretKey secretKey = factory.generateSecret(spec);
+
         ecipher = Cipher.getInstance("DES");
         dcipher = Cipher.getInstance("DES");
-        key = KeyGenerator.getInstance("DES").generateKey();
 
-        ecipher.init(Cipher.ENCRYPT_MODE, key);
-        dcipher.init(Cipher.DECRYPT_MODE, key);
+        ecipher.init(Cipher.ENCRYPT_MODE, secretKey);
+        dcipher.init(Cipher.DECRYPT_MODE, secretKey);
     }
 
     @SneakyThrows
