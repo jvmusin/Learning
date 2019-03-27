@@ -1,10 +1,8 @@
 package lab2
 
-// version 1.1.3
+import java.util.*
 
-import java.util.BitSet
-
-object DES2 {
+object DESKt {
 
     private val PC1 = intArrayOf(
             57, 49, 41, 33, 25, 17, 9,
@@ -135,7 +133,7 @@ object DES2 {
     fun encrypt(key: String, message: String): String {
         val ks = getSubKeys(key)
         var m = message
-        val r = m.length % 16 // check if multiple of 16 hex digits
+        val r = m.length % 16
         val rem = 8 - r / 2
         val remStr = "%02X".format(rem)
         for (i in 1..rem) {
@@ -154,7 +152,7 @@ object DES2 {
 
     fun decrypt(key: String, encoded: String): String {
         val ks = getSubKeys(key)
-        // reverse the subkeys
+        // разворачиваем порядок ключей
         for (i in 1..8) {
             val temp = ks[i]
             ks[i] = ks[17 - i]
@@ -166,7 +164,7 @@ object DES2 {
             val dec = processMessage(encoded.substring(j, j + 16), ks)
             sb.append(dec)
         }
-        //remove the padding
+        // отбрасываем выравнивание
         val padByte = sb[sb.length - 1] - '0'
         return sb.substring(0, sb.length - 2 * padByte)
     }
@@ -174,11 +172,11 @@ object DES2 {
     private fun getSubKeys(key: String): Array<BitSet> {
         val k = key.toLittleEndianBitSet()
 
-        // permute 'key' using table PC1
+        // применяем перестановку 'PC1' к ключу
         val kp = BitSet(56)
         for (i in 0..55) kp[i] = k[PC1[i] - 1]
 
-        // split 'kp' in half and process the resulting series of 'c' and 'd'
+        // разбиваем 'kp' на две части - таблицы 'c' и 'd'
         val c = Array(17) { BitSet(56) }
         val d = Array(17) { BitSet(28) }
         for (i in 0..27) c[0][i] = kp[i]
@@ -188,15 +186,15 @@ object DES2 {
             d[i - 1].shiftLeft(SHIFTS[i - 1], 28, d[i])
         }
 
-        // merge 'd' into 'c'
+        // склеиваем все 'd' и 'c' обратно в 'c'
         for (i in 1..16) {
             for (j in 28..55) c[i][j] = d[i][j - 28]
         }
 
-        // form the sub-keys and store them in 'ks'
+        // собираем все ключи
         val ks = Array(17) { BitSet(48) }
 
-        // permute 'c' using table PC2
+        // применяем перестановку 'PC2' к 'c' для сборки ключей
         for (i in 1..16) {
             for (j in 0..47) ks[i][j] = c[i][PC2[j] - 1]
         }
@@ -207,13 +205,13 @@ object DES2 {
     private fun processMessage(message: String, ks: Array<BitSet>): String {
         val m = message.toLittleEndianBitSet()
 
-        // permute 'message' using table IP
+        // применяем перестановку 'IP' к сообщению
         val mp = BitSet(64)
         for (i in 0..63) {
             mp[i] = m[IP[i] - 1]
         }
 
-        // split 'mp' in half and process the resulting series of 'l' and 'r
+        // разбиваем 'mp' на две части и обрабатываем
         val l = Array(17) { BitSet(32) }
         val r = Array(17) { BitSet(32) }
         for (i in 0..31) l[0][i] = mp[i]
@@ -225,18 +223,18 @@ object DES2 {
             r[i] = l[i - 1]
         }
 
-        // amalgamate r[16] and l[16] (in that order) into 'e'
+        // склеиваем l и r
         val e = BitSet(64)
         for (i in 0..31) e[i] = r[16][i]
         for (i in 32..63) e[i] = l[16][i - 32]
 
-        // permute 'e' using table IP2 ad return result as a hex string
+        // применяем перестановку 'IP2' к 'e' и возвращаем результат как 16ричную строку
         val ep = BitSet(64)
         for (i in 0..63) ep[i] = e[IP2[i] - 1]
         return ep.toHexString(64)
     }
 
-    /* assumes a hex string receiver */
+    // переводим 16ричное число в битсет
     private fun String.toLittleEndianBitSet(): BitSet {
         val bs = BitSet(this.length * 4)
         for ((i, c) in this.withIndex()) {
@@ -246,7 +244,7 @@ object DES2 {
         return bs
     }
 
-    /* assumes a little-endian bitset receiver */
+    // переводим битсет обратно в 16ричное число
     private fun BitSet.toHexString(len: Int): String {
         val size = len / 4
         val sb = StringBuilder(size)
@@ -259,6 +257,7 @@ object DES2 {
         return sb.toString()
     }
 
+    // кладём в out текущий битсет, циключески сдвинутый times раз
     private fun BitSet.shiftLeft(times: Int, len: Int, out: BitSet) {
         for (i in 0 until len) out[i] = this[i]
         for (t in 1..times) {
@@ -269,14 +268,14 @@ object DES2 {
     }
 
     private fun f(r: BitSet, ks: BitSet): BitSet {
-        // permute 'r' using table E
+        // применяем перестановку 'E' к 'r'
         val er = BitSet(48)
         for (i in 0..47) er[i] = r[E[i] - 1]
 
-        // xor 'er' with 'ks' and store back into 'er'
+        // ксорим 'er' с 'ks' внтури 'er'
         er.xor(ks)
 
-        // process 'er' six bits at a time and store resulting four bits in 'sr'
+        // обрабатываем по 6 бит за раз и кладём по 4 в 'sr'
         val sr = BitSet(32)
         for (i in 0..7) {
             val j = i * 6
@@ -284,7 +283,7 @@ object DES2 {
             for (k in 0..5) b[k] = if (er[j + k]) 1 else 0
             val row = 2 * b[0] + b[5]
             val col = 8 * b[1] + 4 * b[2] + 2 * b[3] + b[4]
-            var m = S[i][row * 16 + col]   // apply table S
+            var m = S[i][row * 16 + col]
             var n = 1
             while (m > 0) {
                 val p = m % 2
@@ -294,27 +293,9 @@ object DES2 {
             }
         }
 
-        // permute sr using table P
+        // применяем перестановку 'P' к 'sr'
         val sp = BitSet(32)
         for (i in 0..31) sp[i] = sr[P[i] - 1]
         return sp
-    }
-}
-
-fun main() {
-    val keys = listOf("133457799BBCDFF1", "0E329232EA6D0D73", "0E329232EA6D0D73")
-    val messages = listOf(
-            "0123456789ABCDEF",
-            "8787878787878787",
-            "596F7572206C6970732061726520736D6F6F74686572207468616E20766173656C696E650D0A"
-    )
-    for (i in 0..2) {
-        println("Key     : ${keys[i]}")
-        println("Message : ${messages[i]}")
-        val encoded = DES2.encrypt(keys[i], messages[i])
-        println("Encoded : $encoded")
-        val decoded = DES2.decrypt(keys[i], encoded)
-        println("Decoded : $decoded")
-        println()
     }
 }
