@@ -7,8 +7,8 @@ public class Main {
         sample();
         String text = readLine("Введите строку для шифровки/расшифроки: ");
         String key = readLine("Введите ключ: ");
-        String type = readLine("Зашифровать (encode) или расшифрокать (decode): ");
-        if (type.equals("encode")) {
+        String type = readLine("Зашифровать (encrypt) или расшифрокать (decrypt): ");
+        if (type.equals("encrypt")) {
             new TranspositionCipher().encode(text, key);
         } else {
             new TranspositionCipher().decode(text, key);

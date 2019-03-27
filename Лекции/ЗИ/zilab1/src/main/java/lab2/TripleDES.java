@@ -1,4 +1,4 @@
-package musin.zi.lab2;
+package lab2;
 
 public class TripleDES {
     private final DES des1;
@@ -11,11 +11,11 @@ public class TripleDES {
         des3 = new DES(key3);
     }
 
-    public String encode(String s) {
+    public String encrypt(String s) {
         return des3.encrypt(des2.encrypt(des1.encrypt(s)));
     }
 
-    public String decode(String s) {
+    public String decrypt(String s) {
         return des1.decrypt(des2.decrypt(des3.decrypt(s)));
     }
 }

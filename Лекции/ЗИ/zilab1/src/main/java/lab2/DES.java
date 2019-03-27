@@ -1,4 +1,4 @@
-package musin.zi.lab2;
+package lab2;
 
 import lombok.SneakyThrows;
 
@@ -30,16 +30,16 @@ public class DES {
     @SneakyThrows
     public String encrypt(String s) {
         byte[] raw = s.getBytes(UTF_8);
-        byte[] encrypted = ecipher.doFinal(raw);
-        byte[] b64 = Base64.getEncoder().encode(encrypted);
+        byte[] encoded = ecipher.doFinal(raw);
+        byte[] b64 = Base64.getEncoder().encode(encoded);
         return new String(b64, UTF_8);
     }
 
     @SneakyThrows
     public String decrypt(String s) {
         byte[] b64 = s.getBytes(UTF_8);
-        byte[] encrypted = Base64.getDecoder().decode(b64);
-        byte[] decrypted = dcipher.doFinal(encrypted);
-        return new String(decrypted, UTF_8);
+        byte[] encoded = Base64.getDecoder().decode(b64);
+        byte[] decoded = dcipher.doFinal(encoded);
+        return new String(decoded, UTF_8);
     }
 }
